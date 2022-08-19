@@ -6,5 +6,6 @@ logging.debug: false
 db.driver: mysql
 db.host: makesense.studio
 db.port: 3306
+db.database: assets
 db.username: test
 db.password: test123

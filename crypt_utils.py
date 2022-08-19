@@ -7,7 +7,6 @@ def encrypt_str(text):
     salt = ('YouCanNeverGuessIt!!' + VERSION_SALT).replace(' ', '').strip()
     textByte = text.encode(encoding='utf-8')
     temp1 = base64.b64encode(textByte)
-    print(temp1)
     temp2 = temp1.decode(encoding='utf-8').strip()
     temp3 = temp2 + salt
     temp4 = temp3.encode(encoding='utf-8')

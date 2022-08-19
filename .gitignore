@@ -44,3 +44,4 @@ packages/
 metainfo.yml
 user-conf.yml
 adg.conf
+local.py
