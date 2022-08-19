@@ -43,3 +43,4 @@ packages/
 *.log.*
 metainfo.yml
 user-conf.yml
+adg.conf

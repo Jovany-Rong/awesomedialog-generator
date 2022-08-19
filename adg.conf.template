@@ -1,0 +1,10 @@
+[LOGGING]
+logging.file: <<currentDir>>/adg.log
+logging.debug: false
+
+[DB]
+db.driver: mysql
+db.host: makesense.studio
+db.port: 3306
+db.username: test
+db.password: test123
