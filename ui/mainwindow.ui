@@ -347,7 +347,7 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>26</height>
+     <height>22</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -359,7 +359,14 @@
     <addaction name="actionSave"/>
     <addaction name="actionSaveAs"/>
    </widget>
+   <widget class="QMenu" name="menuConfig">
+    <property name="title">
+     <string>配置</string>
+    </property>
+    <addaction name="actionConnection"/>
+   </widget>
    <addaction name="menuFile"/>
+   <addaction name="menuConfig"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <action name="actionNew">
@@ -380,6 +387,11 @@
   <action name="actionSaveAs">
    <property name="text">
     <string>另存为</string>
+   </property>
+  </action>
+  <action name="actionConnection">
+   <property name="text">
+    <string>连接</string>
    </property>
   </action>
  </widget>
