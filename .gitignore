@@ -45,3 +45,4 @@ metainfo.yml
 user-conf.yml
 adg.conf
 local.py
+.qt_for_python/

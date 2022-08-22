@@ -38,10 +38,10 @@ class Ui_MainWindow(object):
         self.widgetCategory.setObjectName(u"widgetCategory")
         self.verticalLayout_2 = QVBoxLayout(self.widgetCategory)
         self.verticalLayout_2.setObjectName(u"verticalLayout_2")
-        self.listDialogIndex = QListView(self.widgetCategory)
-        self.listDialogIndex.setObjectName(u"listDialogIndex")
+        self.tableDialogIndex = QTableView(self.widgetCategory)
+        self.tableDialogIndex.setObjectName(u"tableDialogIndex")
 
-        self.verticalLayout_2.addWidget(self.listDialogIndex)
+        self.verticalLayout_2.addWidget(self.tableDialogIndex)
 
         self.horizontalLayout_2 = QHBoxLayout()
         self.horizontalLayout_2.setObjectName(u"horizontalLayout_2")
@@ -269,7 +269,7 @@ class Ui_MainWindow(object):
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QMenuBar(MainWindow)
         self.menubar.setObjectName(u"menubar")
-        self.menubar.setGeometry(QRect(0, 0, 800, 22))
+        self.menubar.setGeometry(QRect(0, 0, 800, 24))
         self.menuFile = QMenu(self.menubar)
         self.menuFile.setObjectName(u"menuFile")
         self.menuConfig = QMenu(self.menubar)

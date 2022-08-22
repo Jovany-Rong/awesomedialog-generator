@@ -28,6 +28,13 @@ def get_conf(sec, opt):
     return tmp
 
 
+def set_conf(sec, opt, val):
+    if not configObj.has_section(sec):
+        configObj.add_section(sec)
+    configObj.set(sec, opt, val)
+    save_conf()
+
+
 if __name__ == "__main__":
     val = get_conf('LOGGING', 'logging.file')
     print(val)

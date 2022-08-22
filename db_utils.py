@@ -2,8 +2,9 @@
 
 import pymysql
 from log_utils import logger
-from config_utils import get_conf
+from config_utils import get_conf, set_conf
 from crypt_utils import decrypt_str
+from orm import Dialog
 
 
 class Connection(object):
@@ -62,6 +63,37 @@ class Connection(object):
         return di
     
     
+    def set_config(self, opt, val):
+        sec = 'DB'
+        self.logger.info('Setting database config: %s' % (opt))
+        try:
+            set_conf(sec, opt, val)
+            return True
+        except Exception as e:
+            self.logger.error('An error occurred when setting database connection config %s.\n%s' % (opt, e))
+            return False
+        
+        
+    def get_connection_string(self):
+        conf = self.export_config()
+        if (conf["host"] == '') or (conf["user"] == ''):
+            res = '未连接'
+        else:
+            res = '%s@%s:%s/%s' % (conf["user"], conf["host"], conf["port"], conf["database"])
+        self.logger.info('Getting current connection string: %s' % (res))
+        return res
+        
+        
+    def new_dialog(self, dialogMetaInfo):
+        self.logger.info('Creating new dialog: %s' % (dialogMetaInfo))
+        creator = self.export_config()["user"]
+        dia = Dialog(dialogMetaInfo["id"], dialogMetaInfo["dialogType"], dialogMetaInfo["dialogTitle"], creator)
+        sql = dia.insert_sql()
+        res = self.__exec_sql_without_result(sql)
+        if res:
+            return True
+        else:
+            return False
     
     ### basic methods
     
@@ -137,6 +169,19 @@ class Connection(object):
             self.logger.info('Database connection closed.')
         except:
             self.logger.warning('Failed to close database connection.')
+            
+    
+    def __exec_sql_without_result(self, sql):
+        self.logger.debug('Executing sql: %s' % (sql))
+        try:
+            self.__connect_from_config()
+            self.cursor.execute(sql)
+            self.conn.commit()
+            self.__close_connection()
+            return True
+        except Exception as e:
+            self.logger.error('SQL exception occured: %s.\nSQL is: %s' % (e, sql))
+            return False
             
             
 
