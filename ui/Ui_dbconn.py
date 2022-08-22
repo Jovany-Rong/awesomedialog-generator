@@ -107,6 +107,11 @@ class Ui_DbDialog(object):
 
         self.horizontalLayout.addItem(self.horizontalSpacer)
 
+        self.btnTest = QPushButton(DbDialog)
+        self.btnTest.setObjectName(u"btnTest")
+
+        self.horizontalLayout.addWidget(self.btnTest)
+
         self.btnSave = QPushButton(DbDialog)
         self.btnSave.setObjectName(u"btnSave")
 
@@ -131,6 +136,7 @@ class Ui_DbDialog(object):
         self.label_6.setText(QCoreApplication.translate("DbDialog", u"\u5bc6\u7801", None))
         self.cbDbType.setItemText(0, QCoreApplication.translate("DbDialog", u"MySQL", None))
 
+        self.btnTest.setText(QCoreApplication.translate("DbDialog", u"\u6d4b\u8bd5", None))
         self.btnSave.setText(QCoreApplication.translate("DbDialog", u"\u4fdd\u5b58", None))
     # retranslateUi
 
