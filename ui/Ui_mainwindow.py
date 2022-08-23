@@ -81,34 +81,34 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout_4.addWidget(self.label_3)
 
-        self.lbId = QLabel(self.widgetDetail)
-        self.lbId.setObjectName(u"lbId")
+        self.lbInteractId = QLabel(self.widgetDetail)
+        self.lbInteractId.setObjectName(u"lbInteractId")
 
-        self.horizontalLayout_4.addWidget(self.lbId)
+        self.horizontalLayout_4.addWidget(self.lbInteractId)
 
         self.label = QLabel(self.widgetDetail)
         self.label.setObjectName(u"label")
 
         self.horizontalLayout_4.addWidget(self.label)
 
-        self.spinIndex = QSpinBox(self.widgetDetail)
-        self.spinIndex.setObjectName(u"spinIndex")
+        self.spinInteractIndex = QSpinBox(self.widgetDetail)
+        self.spinInteractIndex.setObjectName(u"spinInteractIndex")
+        self.spinInteractIndex.setMaximum(9999)
 
-        self.horizontalLayout_4.addWidget(self.spinIndex)
+        self.horizontalLayout_4.addWidget(self.spinInteractIndex)
 
         self.label_2 = QLabel(self.widgetDetail)
         self.label_2.setObjectName(u"label_2")
 
         self.horizontalLayout_4.addWidget(self.label_2)
 
-        self.cbSelect = QComboBox(self.widgetDetail)
-        self.cbSelect.addItem("")
-        self.cbSelect.addItem("")
-        self.cbSelect.addItem("")
-        self.cbSelect.setObjectName(u"cbSelect")
-        self.cbSelect.setMinimumSize(QSize(100, 0))
+        self.cbInteractType = QComboBox(self.widgetDetail)
+        self.cbInteractType.addItem("")
+        self.cbInteractType.addItem("")
+        self.cbInteractType.setObjectName(u"cbInteractType")
+        self.cbInteractType.setMinimumSize(QSize(100, 0))
 
-        self.horizontalLayout_4.addWidget(self.cbSelect)
+        self.horizontalLayout_4.addWidget(self.cbInteractType)
 
         self.horizontalSpacer_2 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
 
@@ -124,20 +124,22 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout_3.addWidget(self.label_6)
 
-        self.spinSameLevel = QSpinBox(self.widgetDetail)
-        self.spinSameLevel.setObjectName(u"spinSameLevel")
+        self.spinInteractBefore = QSpinBox(self.widgetDetail)
+        self.spinInteractBefore.setObjectName(u"spinInteractBefore")
+        self.spinInteractBefore.setMinimum(-1)
+        self.spinInteractBefore.setMaximum(9998)
 
-        self.horizontalLayout_3.addWidget(self.spinSameLevel)
+        self.horizontalLayout_3.addWidget(self.spinInteractBefore)
 
-        self.btnSameAdd = QPushButton(self.widgetDetail)
-        self.btnSameAdd.setObjectName(u"btnSameAdd")
+        self.label_7 = QLabel(self.widgetDetail)
+        self.label_7.setObjectName(u"label_7")
 
-        self.horizontalLayout_3.addWidget(self.btnSameAdd)
+        self.horizontalLayout_3.addWidget(self.label_7)
 
-        self.btnSameDel = QPushButton(self.widgetDetail)
-        self.btnSameDel.setObjectName(u"btnSameDel")
+        self.editSpeakerName = QLineEdit(self.widgetDetail)
+        self.editSpeakerName.setObjectName(u"editSpeakerName")
 
-        self.horizontalLayout_3.addWidget(self.btnSameDel)
+        self.horizontalLayout_3.addWidget(self.editSpeakerName)
 
         self.horizontalSpacer_3 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
 
@@ -148,82 +150,34 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout_5 = QHBoxLayout()
         self.horizontalLayout_5.setObjectName(u"horizontalLayout_5")
-        self.label_5 = QLabel(self.widgetDetail)
-        self.label_5.setObjectName(u"label_5")
-
-        self.horizontalLayout_5.addWidget(self.label_5)
-
-        self.spinNextIndex = QSpinBox(self.widgetDetail)
-        self.spinNextIndex.setObjectName(u"spinNextIndex")
-
-        self.horizontalLayout_5.addWidget(self.spinNextIndex)
-
-        self.btnNextAdd = QPushButton(self.widgetDetail)
-        self.btnNextAdd.setObjectName(u"btnNextAdd")
-
-        self.horizontalLayout_5.addWidget(self.btnNextAdd)
-
-        self.btnNextDel = QPushButton(self.widgetDetail)
-        self.btnNextDel.setObjectName(u"btnNextDel")
-
-        self.horizontalLayout_5.addWidget(self.btnNextDel)
-
-        self.horizontalSpacer_4 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
-
-        self.horizontalLayout_5.addItem(self.horizontalSpacer_4)
-
-
-        self.verticalLayout_3.addLayout(self.horizontalLayout_5)
-
-        self.horizontalLayout_6 = QHBoxLayout()
-        self.horizontalLayout_6.setObjectName(u"horizontalLayout_6")
-        self.label_7 = QLabel(self.widgetDetail)
-        self.label_7.setObjectName(u"label_7")
-
-        self.horizontalLayout_6.addWidget(self.label_7)
-
-        self.editName = QLineEdit(self.widgetDetail)
-        self.editName.setObjectName(u"editName")
-
-        self.horizontalLayout_6.addWidget(self.editName)
-
         self.label_9 = QLabel(self.widgetDetail)
         self.label_9.setObjectName(u"label_9")
 
-        self.horizontalLayout_6.addWidget(self.label_9)
+        self.horizontalLayout_5.addWidget(self.label_9)
 
-        self.cbPosition = QComboBox(self.widgetDetail)
-        self.cbPosition.addItem("")
-        self.cbPosition.addItem("")
-        self.cbPosition.setObjectName(u"cbPosition")
+        self.cbSpeakerAvatarPosition = QComboBox(self.widgetDetail)
+        self.cbSpeakerAvatarPosition.addItem("")
+        self.cbSpeakerAvatarPosition.addItem("")
+        self.cbSpeakerAvatarPosition.setObjectName(u"cbSpeakerAvatarPosition")
 
-        self.horizontalLayout_6.addWidget(self.cbPosition)
+        self.horizontalLayout_5.addWidget(self.cbSpeakerAvatarPosition)
 
-        self.horizontalSpacer_7 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
-
-        self.horizontalLayout_6.addItem(self.horizontalSpacer_7)
-
-
-        self.verticalLayout_3.addLayout(self.horizontalLayout_6)
-
-        self.horizontalLayout_7 = QHBoxLayout()
-        self.horizontalLayout_7.setObjectName(u"horizontalLayout_7")
         self.label_8 = QLabel(self.widgetDetail)
         self.label_8.setObjectName(u"label_8")
 
-        self.horizontalLayout_7.addWidget(self.label_8)
+        self.horizontalLayout_5.addWidget(self.label_8)
 
-        self.editNameIndex = QLineEdit(self.widgetDetail)
-        self.editNameIndex.setObjectName(u"editNameIndex")
+        self.editSpeakerAvatarId = QLineEdit(self.widgetDetail)
+        self.editSpeakerAvatarId.setObjectName(u"editSpeakerAvatarId")
 
-        self.horizontalLayout_7.addWidget(self.editNameIndex)
+        self.horizontalLayout_5.addWidget(self.editSpeakerAvatarId)
 
         self.horizontalSpacer_6 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
 
-        self.horizontalLayout_7.addItem(self.horizontalSpacer_6)
+        self.horizontalLayout_5.addItem(self.horizontalSpacer_6)
 
 
-        self.verticalLayout_3.addLayout(self.horizontalLayout_7)
+        self.verticalLayout_3.addLayout(self.horizontalLayout_5)
 
         self.line = QFrame(self.widgetDetail)
         self.line.setObjectName(u"line")
@@ -302,26 +256,20 @@ class Ui_MainWindow(object):
         self.btnAdd.setText(QCoreApplication.translate("MainWindow", u"+", None))
         self.btnDel.setText(QCoreApplication.translate("MainWindow", u"-", None))
         self.btnReorder.setText(QCoreApplication.translate("MainWindow", u"\u6392\u5e8f", None))
-        self.label_3.setText(QCoreApplication.translate("MainWindow", u"\u552f\u4e00ID", None))
-        self.lbId.setText(QCoreApplication.translate("MainWindow", u"random string", None))
-        self.label.setText(QCoreApplication.translate("MainWindow", u"\u7f16\u53f7", None))
-        self.label_2.setText(QCoreApplication.translate("MainWindow", u"\u5f62\u5f0f", None))
-        self.cbSelect.setItemText(0, QCoreApplication.translate("MainWindow", u"\u5bf9\u8bdd(\u975e\u7ed3\u5c3e)", None))
-        self.cbSelect.setItemText(1, QCoreApplication.translate("MainWindow", u"\u9009\u9879", None))
-        self.cbSelect.setItemText(2, QCoreApplication.translate("MainWindow", u"\u5bf9\u8bdd(\u7ed3\u5c3e)", None))
+        self.label_3.setText(QCoreApplication.translate("MainWindow", u"ID", None))
+        self.lbInteractId.setText(QCoreApplication.translate("MainWindow", u"null", None))
+        self.label.setText(QCoreApplication.translate("MainWindow", u"\u5e8f\u53f7", None))
+        self.label_2.setText(QCoreApplication.translate("MainWindow", u"\u4e92\u52a8\u7c7b\u578b", None))
+        self.cbInteractType.setItemText(0, QCoreApplication.translate("MainWindow", u"\u5bf9\u8bdd", None))
+        self.cbInteractType.setItemText(1, QCoreApplication.translate("MainWindow", u"\u9009\u9879", None))
 
-        self.label_6.setText(QCoreApplication.translate("MainWindow", u"\u5e76\u5217\u7f16\u53f7", None))
-        self.btnSameAdd.setText(QCoreApplication.translate("MainWindow", u"+", None))
-        self.btnSameDel.setText(QCoreApplication.translate("MainWindow", u"-", None))
-        self.label_5.setText(QCoreApplication.translate("MainWindow", u"\u76ee\u6807\u7f16\u53f7", None))
-        self.btnNextAdd.setText(QCoreApplication.translate("MainWindow", u"+", None))
-        self.btnNextDel.setText(QCoreApplication.translate("MainWindow", u"-", None))
-        self.label_7.setText(QCoreApplication.translate("MainWindow", u"\u4eba\u7269\u540d\u79f0", None))
-        self.label_9.setText(QCoreApplication.translate("MainWindow", u"\u663e\u793a\u4f4d\u7f6e", None))
-        self.cbPosition.setItemText(0, QCoreApplication.translate("MainWindow", u"\u5de6", None))
-        self.cbPosition.setItemText(1, QCoreApplication.translate("MainWindow", u"\u53f3", None))
+        self.label_6.setText(QCoreApplication.translate("MainWindow", u"\u4e0a\u4e00\u6b65\u5e8f\u53f7", None))
+        self.label_7.setText(QCoreApplication.translate("MainWindow", u"\u8bf4\u8bdd\u4eba\u540d\u79f0", None))
+        self.label_9.setText(QCoreApplication.translate("MainWindow", u"\u8bf4\u8bdd\u4eba\u5934\u50cf\u4f4d\u7f6e", None))
+        self.cbSpeakerAvatarPosition.setItemText(0, QCoreApplication.translate("MainWindow", u"\u5de6", None))
+        self.cbSpeakerAvatarPosition.setItemText(1, QCoreApplication.translate("MainWindow", u"\u53f3", None))
 
-        self.label_8.setText(QCoreApplication.translate("MainWindow", u"\u4eba\u7269\u5934\u50cf", None))
+        self.label_8.setText(QCoreApplication.translate("MainWindow", u"\u8bf4\u8bdd\u4eba\u5934\u50cfID", None))
         self.label_4.setText(QCoreApplication.translate("MainWindow", u"\u5185\u5bb9", None))
         self.menuFile.setTitle(QCoreApplication.translate("MainWindow", u"\u6587\u4ef6", None))
         self.menuConfig.setTitle(QCoreApplication.translate("MainWindow", u"\u914d\u7f6e", None))

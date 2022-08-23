@@ -4,7 +4,8 @@ import pymysql
 from log_utils import logger
 from config_utils import get_conf, set_conf, DB_ADMINISTRATORS
 from crypt_utils import decrypt_str
-from orm import Dialog
+from orm import Dialog, Interact
+from common_utils import gen_time_based_uuid
 
 
 class Connection(object):
@@ -95,6 +96,31 @@ class Connection(object):
         else:
             return False
         
+        
+    def new_blank_interact(self, dialogId):
+        self.logger.info('Creating new blank interact of dialog %s.' % (dialogId))
+        uuid = gen_time_based_uuid()
+        t = Interact(uuid, dialogId)
+        self.logger.info('Using uuid: %s' % (uuid))
+        return t
+        
+        
+    def get_existed_interacts(self, dialogId):
+        self.logger.info('Getting existing interacts of dialog %s.' % (dialogId))
+        sql = """
+        select * from t_dialog_data where dialog_id = '%s' order by interact_index asc
+        """
+        result = self.__exec_sql_with_all_result(sql)
+        if result == []:
+            self.logger.warning('No interact found.')
+            return []
+        t = list()
+        for row in result:
+            i = Interact(row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8])
+            t.append(i)
+        self.logger.info('%s interact(s) found.' % (len(t)))
+        return t
+        
     
     def search_owned_dialogs(self):
         creator = self.export_config()["user"]
@@ -113,7 +139,14 @@ class Connection(object):
         return result
         
         
-        
+    def get_dialog(self, dialogId):
+        result = self.__search_table_with_pk('t_dialog_meta', 'dialog_id', dialogId)
+        if result == []:
+            self.logger.error('No such dialog ID: %s' % (dialogId))
+            return None
+        dia = Dialog(dialogId, result[0][1], result[0][2], result[0][5])
+        self.logger.info('Dialog found.')
+        return dia
         
     
     ### basic methods

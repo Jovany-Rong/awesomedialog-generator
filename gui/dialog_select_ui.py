@@ -66,5 +66,6 @@ class DialogSelector(QDialog, Ui_DialogSelectDialog):
             
         self.logger.info('Selected dialog ID is "%s".' % (dialogId))
         self.sigOpen.emit(dialogId)
+        self.close()
         
         

@@ -72,36 +72,40 @@
            <item>
             <widget class="QLabel" name="label_3">
              <property name="text">
-              <string>唯一ID</string>
+              <string>ID</string>
              </property>
             </widget>
            </item>
            <item>
-            <widget class="QLabel" name="lbId">
+            <widget class="QLabel" name="lbInteractId">
              <property name="text">
-              <string>random string</string>
+              <string>null</string>
              </property>
             </widget>
            </item>
            <item>
             <widget class="QLabel" name="label">
              <property name="text">
-              <string>编号</string>
+              <string>序号</string>
              </property>
             </widget>
            </item>
            <item>
-            <widget class="QSpinBox" name="spinIndex"/>
+            <widget class="QSpinBox" name="spinInteractIndex">
+             <property name="maximum">
+              <number>9999</number>
+             </property>
+            </widget>
            </item>
            <item>
             <widget class="QLabel" name="label_2">
              <property name="text">
-              <string>形式</string>
+              <string>互动类型</string>
              </property>
             </widget>
            </item>
            <item>
-            <widget class="QComboBox" name="cbSelect">
+            <widget class="QComboBox" name="cbInteractType">
              <property name="minimumSize">
               <size>
                <width>100</width>
@@ -110,17 +114,12 @@
              </property>
              <item>
               <property name="text">
-               <string>对话(非结尾)</string>
+               <string>对话</string>
               </property>
              </item>
              <item>
               <property name="text">
                <string>选项</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>对话(结尾)</string>
               </property>
              </item>
             </widget>
@@ -145,26 +144,29 @@
            <item>
             <widget class="QLabel" name="label_6">
              <property name="text">
-              <string>并列编号</string>
+              <string>上一步序号</string>
              </property>
             </widget>
            </item>
            <item>
-            <widget class="QSpinBox" name="spinSameLevel"/>
+            <widget class="QSpinBox" name="spinInteractBefore">
+             <property name="minimum">
+              <number>-1</number>
+             </property>
+             <property name="maximum">
+              <number>9998</number>
+             </property>
+            </widget>
            </item>
            <item>
-            <widget class="QPushButton" name="btnSameAdd">
+            <widget class="QLabel" name="label_7">
              <property name="text">
-              <string>+</string>
+              <string>说话人名称</string>
              </property>
             </widget>
            </item>
            <item>
-            <widget class="QPushButton" name="btnSameDel">
-             <property name="text">
-              <string>-</string>
-             </property>
-            </widget>
+            <widget class="QLineEdit" name="editSpeakerName"/>
            </item>
            <item>
             <spacer name="horizontalSpacer_3">
@@ -184,65 +186,14 @@
          <item>
           <layout class="QHBoxLayout" name="horizontalLayout_5">
            <item>
-            <widget class="QLabel" name="label_5">
-             <property name="text">
-              <string>目标编号</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QSpinBox" name="spinNextIndex"/>
-           </item>
-           <item>
-            <widget class="QPushButton" name="btnNextAdd">
-             <property name="text">
-              <string>+</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QPushButton" name="btnNextDel">
-             <property name="text">
-              <string>-</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <spacer name="horizontalSpacer_4">
-             <property name="orientation">
-              <enum>Qt::Horizontal</enum>
-             </property>
-             <property name="sizeHint" stdset="0">
-              <size>
-               <width>40</width>
-               <height>20</height>
-              </size>
-             </property>
-            </spacer>
-           </item>
-          </layout>
-         </item>
-         <item>
-          <layout class="QHBoxLayout" name="horizontalLayout_6">
-           <item>
-            <widget class="QLabel" name="label_7">
-             <property name="text">
-              <string>人物名称</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLineEdit" name="editName"/>
-           </item>
-           <item>
             <widget class="QLabel" name="label_9">
              <property name="text">
-              <string>显示位置</string>
+              <string>说话人头像位置</string>
              </property>
             </widget>
            </item>
            <item>
-            <widget class="QComboBox" name="cbPosition">
+            <widget class="QComboBox" name="cbSpeakerAvatarPosition">
              <item>
               <property name="text">
                <string>左</string>
@@ -256,31 +207,14 @@
             </widget>
            </item>
            <item>
-            <spacer name="horizontalSpacer_7">
-             <property name="orientation">
-              <enum>Qt::Horizontal</enum>
-             </property>
-             <property name="sizeHint" stdset="0">
-              <size>
-               <width>40</width>
-               <height>20</height>
-              </size>
-             </property>
-            </spacer>
-           </item>
-          </layout>
-         </item>
-         <item>
-          <layout class="QHBoxLayout" name="horizontalLayout_7">
-           <item>
             <widget class="QLabel" name="label_8">
              <property name="text">
-              <string>人物头像</string>
+              <string>说话人头像ID</string>
              </property>
             </widget>
            </item>
            <item>
-            <widget class="QLineEdit" name="editNameIndex"/>
+            <widget class="QLineEdit" name="editSpeakerAvatarId"/>
            </item>
            <item>
             <spacer name="horizontalSpacer_6">
