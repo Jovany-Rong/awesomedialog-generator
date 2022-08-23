@@ -3,6 +3,8 @@
 import configparser as cp 
 from common_utils import CURRENT_DIR
 
+DB_ADMINISTRATORS = ('assets_admin', 'root')
+
 def __create_conf():
     config = cp.ConfigParser()
     config.read(CURRENT_DIR + '/adg.conf', encoding='utf-8')

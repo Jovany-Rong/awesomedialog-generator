@@ -4,7 +4,6 @@ from myqt import *
 from ui import Ui_DialogDialog
 from log_utils import logger
 from common_utils import CURRENT_DIR
-from db_utils import Connection
 
 class DialogEditor(QDialog, Ui_DialogDialog):
     sigSave = pyqtSignal(dict)

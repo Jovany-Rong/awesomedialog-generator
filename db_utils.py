@@ -2,7 +2,7 @@
 
 import pymysql
 from log_utils import logger
-from config_utils import get_conf, set_conf
+from config_utils import get_conf, set_conf, DB_ADMINISTRATORS
 from crypt_utils import decrypt_str
 from orm import Dialog
 
@@ -94,6 +94,27 @@ class Connection(object):
             return True
         else:
             return False
+        
+    
+    def search_owned_dialogs(self):
+        creator = self.export_config()["user"]
+        if creator in DB_ADMINISTRATORS:
+            self.logger.info('Searching all dialogs because you are an administrator.')
+            filterCondition = ' where 1 = 1'
+        else:
+            self.logger.info('Searching dialogs created by user %s.' % (creator))
+            filterCondition = " where create_user = '%s'" % (creator)
+            
+        sql = "select * from t_dialog_meta" + filterCondition
+        
+        result = self.__exec_sql_with_all_result(sql)
+        self.logger.info('%s result(s) found.' % (len(result)))
+        
+        return result
+        
+        
+        
+        
     
     ### basic methods
     
@@ -182,7 +203,28 @@ class Connection(object):
         except Exception as e:
             self.logger.error('SQL exception occured: %s.\nSQL is: %s' % (e, sql))
             return False
-            
+        
+        
+    def __exec_sql_with_all_result(self, sql):
+        self.logger.debug('Executing sql and getting result: %s' % (sql))
+        try:
+            self.__connect_from_config()
+            self.cursor.execute(sql)
+            result = list(self.cursor.fetchall())
+            self.__close_connection()
+            self.logger.debug('Result: %s' % (result))
+            return result
+        except Exception as e:
+            self.logger.error('SQL exception occured: %s.\nSQL is: %s' % (e, sql))
+            return []
+        
+        
+    def __search_table_with_pk(self, tableName, pkColumn, pkVal):
+        sql = '''
+select * from %s where %s = '%s' limit 1
+        ''' % (tableName, pkColumn, pkVal)
+        result = self.__exec_sql_with_all_result(sql)
+        return result
             
 
 if __name__ == "__main__":

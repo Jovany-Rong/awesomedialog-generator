@@ -5,7 +5,7 @@ from ui import Ui_MainWindow
 from log_utils import logger
 from common_utils import CURRENT_DIR, gen_time_based_uuid
 from db_utils import Connection
-from gui import DbDialog, DialogEditor
+from gui import DbDialog, DialogEditor, DialogSelector
 
 class MainWindow(QMainWindow, Ui_MainWindow):
     def __init__(self):
@@ -29,6 +29,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def __connect(self):
         self.actionConnection.triggered.connect(self.__db_config)
         self.actionNew.triggered.connect(self.__new_dialog)
+        self.actionOpen.triggered.connect(self.__select_dialog)
     
     
     def __db_config(self):
@@ -45,6 +46,14 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.dialogEditorWindow = DialogEditor(uuid)
         self.dialogEditorWindow.sigSave.connect(self.__slot_save_dialog)
         self.dialogEditorWindow.showNormal()
+        
+        
+    def __select_dialog(self):
+        self.logger.info('Opening dialog selector window to open a dialog.')
+        
+        self.dialogSelectorWindow = DialogSelector()
+        
+        self.dialogSelectorWindow.showNormal()
         
         
     def __show_conn_string(self):
