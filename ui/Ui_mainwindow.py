@@ -28,6 +28,10 @@ class Ui_MainWindow(object):
         self.actionSaveAs.setObjectName(u"actionSaveAs")
         self.actionConnection = QAction(MainWindow)
         self.actionConnection.setObjectName(u"actionConnection")
+        self.actionFromStart = QAction(MainWindow)
+        self.actionFromStart.setObjectName(u"actionFromStart")
+        self.actionFromNow = QAction(MainWindow)
+        self.actionFromNow.setObjectName(u"actionFromNow")
         self.centralwidget = QWidget(MainWindow)
         self.centralwidget.setObjectName(u"centralwidget")
         self.verticalLayout = QVBoxLayout(self.centralwidget)
@@ -205,6 +209,20 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_3.addWidget(self.textContent)
 
+        self.horizontalLayout_6 = QHBoxLayout()
+        self.horizontalLayout_6.setObjectName(u"horizontalLayout_6")
+        self.horizontalSpacer_4 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+
+        self.horizontalLayout_6.addItem(self.horizontalSpacer_4)
+
+        self.btnCommit = QPushButton(self.widgetDetail)
+        self.btnCommit.setObjectName(u"btnCommit")
+
+        self.horizontalLayout_6.addWidget(self.btnCommit)
+
+
+        self.verticalLayout_3.addLayout(self.horizontalLayout_6)
+
 
         self.horizontalLayout.addWidget(self.widgetDetail)
 
@@ -223,11 +241,13 @@ class Ui_MainWindow(object):
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QMenuBar(MainWindow)
         self.menubar.setObjectName(u"menubar")
-        self.menubar.setGeometry(QRect(0, 0, 800, 24))
+        self.menubar.setGeometry(QRect(0, 0, 800, 26))
         self.menuFile = QMenu(self.menubar)
         self.menuFile.setObjectName(u"menuFile")
         self.menuConfig = QMenu(self.menubar)
         self.menuConfig.setObjectName(u"menuConfig")
+        self.menuplay = QMenu(self.menubar)
+        self.menuplay.setObjectName(u"menuplay")
         MainWindow.setMenuBar(self.menubar)
         self.statusbar = QStatusBar(MainWindow)
         self.statusbar.setObjectName(u"statusbar")
@@ -235,11 +255,13 @@ class Ui_MainWindow(object):
 
         self.menubar.addAction(self.menuFile.menuAction())
         self.menubar.addAction(self.menuConfig.menuAction())
+        self.menubar.addAction(self.menuplay.menuAction())
         self.menuFile.addAction(self.actionNew)
         self.menuFile.addAction(self.actionOpen)
         self.menuFile.addAction(self.actionSave)
-        self.menuFile.addAction(self.actionSaveAs)
         self.menuConfig.addAction(self.actionConnection)
+        self.menuplay.addAction(self.actionFromStart)
+        self.menuplay.addAction(self.actionFromNow)
 
         self.retranslateUi(MainWindow)
 
@@ -253,6 +275,8 @@ class Ui_MainWindow(object):
         self.actionSave.setText(QCoreApplication.translate("MainWindow", u"\u4fdd\u5b58", None))
         self.actionSaveAs.setText(QCoreApplication.translate("MainWindow", u"\u53e6\u5b58\u4e3a", None))
         self.actionConnection.setText(QCoreApplication.translate("MainWindow", u"\u8fde\u63a5", None))
+        self.actionFromStart.setText(QCoreApplication.translate("MainWindow", u"\u4ece\u5934\u5f00\u59cb", None))
+        self.actionFromNow.setText(QCoreApplication.translate("MainWindow", u"\u4ece\u5f53\u524d\u4f4d\u7f6e\u5f00\u59cb", None))
         self.btnAdd.setText(QCoreApplication.translate("MainWindow", u"+", None))
         self.btnDel.setText(QCoreApplication.translate("MainWindow", u"-", None))
         self.btnReorder.setText(QCoreApplication.translate("MainWindow", u"\u6392\u5e8f", None))
@@ -271,7 +295,9 @@ class Ui_MainWindow(object):
 
         self.label_8.setText(QCoreApplication.translate("MainWindow", u"\u8bf4\u8bdd\u4eba\u5934\u50cfID", None))
         self.label_4.setText(QCoreApplication.translate("MainWindow", u"\u5185\u5bb9", None))
+        self.btnCommit.setText(QCoreApplication.translate("MainWindow", u"\u63d0\u4ea4", None))
         self.menuFile.setTitle(QCoreApplication.translate("MainWindow", u"\u6587\u4ef6", None))
         self.menuConfig.setTitle(QCoreApplication.translate("MainWindow", u"\u914d\u7f6e", None))
+        self.menuplay.setTitle(QCoreApplication.translate("MainWindow", u"\u9884\u89c8", None))
     # retranslateUi
 

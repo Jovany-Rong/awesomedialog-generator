@@ -5,7 +5,7 @@ from ui import Ui_MainWindow
 from log_utils import logger
 from common_utils import CURRENT_DIR, gen_time_based_uuid
 from db_utils import Connection
-from gui import DbDialog, DialogEditor, DialogSelector
+from gui import DbDialog, DialogEditor, DialogSelector, PlayerWindow
 
 class MainWindow(QMainWindow, Ui_MainWindow):
     def __init__(self):
@@ -36,6 +36,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.actionNew.triggered.connect(self.__new_dialog)
         self.actionOpen.triggered.connect(self.__select_dialog)
         self.btnAdd.clicked.connect(self.__add_interact)
+        self.btnCommit.clicked.connect(self.__commit_interact_modify)
+        self.actionSave.triggered.connect(self.__save_dialog_interacts)
+        self.actionFromStart.triggered.connect(self.__play_dialog_from_start)
     
     
     def __db_config(self):
@@ -151,7 +154,116 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         else:
             return self.currentInteracts[-1].interactIndex
         
+    
+    def __commit_interact_modify(self):
+        interactId = self.lbInteractId.text()
+        self.logger.info('Committing current modifications of interact %s.' % (interactId))
+        if interactId == 'null':
+            self.logger.error('No interact selected so you cannot commit it.')
+            QMessageBox.critical(self, 'Error', '尚未选择互动！无法提交！')
+            return
         
+        if len(self.currentInteracts) == 0:
+            self.logger.error('There is no current interact so you cannot commit it.')
+        
+        flag = False
+        for interact in self.currentInteracts:
+            if interact.interactId == interactId:
+                interact.interactType = self.cbInteractType.currentIndex()
+                interact.speakerName = self.editSpeakerName.text()
+                interact.speakerAvatarId = self.editSpeakerAvatarId.text()
+                interact.speakerAvatarPosition = self.cbSpeakerAvatarPosition.currentIndex()
+                interact.interactIndex = self.spinInteractIndex.value()
+                interact.interactBefore = self.spinInteractBefore.value()
+                interact.content = self.textContent.toPlainText()
+                flag = True
+                break
+            
+        if flag:
+            self.logger.info('Interact %s committed.' % (interactId))
+            QMessageBox.information(self, 'Info', 'Success.')
+        else:
+            self.logger.error('No current interact matched so you cannot commit it.')
+            QMessageBox.critical(self, 'Error', '未匹配到互动！提交失败！')
+       
+    
+    def __save_dialog_interacts(self):
+        if self.currentDialog == None:
+            self.logger.error('No dialog opened so you cannot save interacts.')
+            QMessageBox.critical(self, 'Error', '未打开对话！无法保存互动信息！')
+            return
+        
+        if not self.__check_interacts_validity():
+            return
+        
+        res = self.connector.update_interacts_of_dialog(self.currentDialog.dialogId, self.currentInteracts)
+        
+        if res == False:
+            QMessageBox.critical(self, 'Error', 'Failed.')
+        else:
+            QMessageBox.information(self, 'Info', 'Success.')
+            
+            
+    def __play_dialog_from_start(self):
+        if self.currentDialog == None:
+            self.logger.error('No dialog opened so you cannot preview dialog.')
+            QMessageBox.critical(self, 'Error', '未打开对话！无法预览对话！')
+            return
+        
+        if not self.__check_interacts_validity():
+            return
+        
+        self.playerWindow = PlayerWindow(self.currentDialog, self.currentInteracts)
+        
+        self.playerWindow.showNormal()
+    
+    
+    def __check_interacts_validity(self):
+        self.logger.info('Checking current interacts validity.')
+        
+        ct = 0
+        for t in self.currentInteracts:
+            ct += 1
+            self.logger.info('Checklist %s: Interact ID %s Index %s' % (ct, t.interactId, t.interactIndex))
+            if t.interactBefore == None:
+                self.logger.critical('interact_before cannot be null!')
+                self.logger.info('Checklist %s failed.' % (ct))
+                QMessageBox.critical(self, 'Error', 'ID %s 序号 %s 的上一步序号验证失败！请确认是否没有正确提交！' % (t.interactId, t.interactIndex))
+                return False
+                
+            if t.interactType == None:
+                self.logger.critical('interact_type cannot be null!')
+                self.logger.info('Checklist %s failed.' % (ct))
+                QMessageBox.critical(self, 'Error', 'ID %s 序号 %s 的互动类型验证失败！请确认是否没有正确提交！' % (t.interactId, t.interactIndex))
+                return False
+                
+            if t.speakerName == None:
+                self.logger.critical('speaker_name cannot be null!')
+                self.logger.info('Checklist %s failed.' % (ct))
+                QMessageBox.critical(self, 'Error', 'ID %s 序号 %s 的说话人名称验证失败！请确认是否没有正确提交！' % (t.interactId, t.interactIndex))
+                return False
+                
+            if t.speakerAvatarId == None:
+                self.logger.critical('speaker_avatar_id cannot be null!')
+                self.logger.info('Checklist %s failed.' % (ct))
+                QMessageBox.critical(self, 'Error', 'ID %s 序号 %s 的说话人头像ID验证失败！请确认是否没有正确提交！' % (t.interactId, t.interactIndex))
+                return False
+                
+            if t.speakerAvatarPosition == None:
+                self.logger.critical('speaker_avatar_position cannot be null!')
+                self.logger.info('Checklist %s failed.' % (ct))
+                QMessageBox.critical(self, 'Error', 'ID %s 序号 %s 的说话人头像位置验证失败！请确认是否没有正确提交！' % (t.interactId, t.interactIndex))
+                return False
+                
+            if t.content == None:
+                self.logger.critical('content cannot be null!')
+                self.logger.info('Checklist %s failed.' % (ct))
+                QMessageBox.critical(self, 'Error', 'ID %s 序号 %s 的内容验证失败！请确认是否没有正确提交！' % (t.interactId, t.interactIndex))
+                return False
+            
+        self.logger.info('All checklists succeeded.')
+        return True
+    
     
     def __show_interact_detail(self):
         if self.currentDialog == None:

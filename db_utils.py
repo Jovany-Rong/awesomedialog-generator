@@ -109,7 +109,7 @@ class Connection(object):
         self.logger.info('Getting existing interacts of dialog %s.' % (dialogId))
         sql = """
         select * from t_dialog_data where dialog_id = '%s' order by interact_index asc
-        """
+        """ % (dialogId)
         result = self.__exec_sql_with_all_result(sql)
         if result == []:
             self.logger.warning('No interact found.')
@@ -147,6 +147,33 @@ class Connection(object):
         dia = Dialog(dialogId, result[0][1], result[0][2], result[0][5])
         self.logger.info('Dialog found.')
         return dia
+    
+    
+    def update_interacts_of_dialog(self, dialogId, interacts):
+        sqlList = []
+        sql = '''
+        delete from t_dialog_data where dialog_id = '%s'
+        ''' % (dialogId)
+        sqlList.append(sql)
+        for interact in interacts:
+            sql = '''
+            insert into t_dialog_data (interact_id, dialog_id, interact_type, speaker_name, speaker_avatar_id, speaker_avatar_position, interact_index, interact_before, content)
+            values ('%s', '%s', %s, '%s', '%s', %s, %s, %s, '%s')
+            ''' % (
+                interact.interactId,
+                interact.dialogId,
+                interact.interactType,
+                interact.speakerName, 
+                interact.speakerAvatarId, 
+                interact.speakerAvatarPosition,
+                interact.interactIndex,
+                interact.interactBefore,
+                interact.content
+            )
+            sqlList.append(sql)
+        
+        result = self.__exec_sqls(sqlList)
+        return result
         
     
     ### basic methods
@@ -235,6 +262,37 @@ class Connection(object):
             return True
         except Exception as e:
             self.logger.error('SQL exception occured: %s.\nSQL is: %s' % (e, sql))
+            return False
+        
+        
+    def __exec_sqls(self, sqlList):
+        try:
+            self.__connect_from_config()
+        except Exception as e:
+            self.logger.error('Connection failed. %s' % (e))
+            return False
+        
+        flag = True
+        
+        for sql in sqlList:
+            self.logger.debug('Executing sql: %s' % (sql))
+            try:
+                self.cursor.execute(sql)
+            except Exception as e:
+                self.logger.error('SQL exception occured: %s.\nSQL is: %s' % (e, sql))
+                flag = False
+                break
+            
+        if flag == False:
+            self.logger.warning('Execution cancelled.')
+            return False
+        
+        try:
+            self.conn.commit()
+            self.__close_connection()
+            return True
+        except Exception as e:
+            self.logger.error('Closing connection failed. %s' % (e))
             return False
         
         

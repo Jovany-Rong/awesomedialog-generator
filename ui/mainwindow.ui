@@ -265,6 +265,30 @@
          <item>
           <widget class="QTextEdit" name="textContent"/>
          </item>
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout_6">
+           <item>
+            <spacer name="horizontalSpacer_4">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>40</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item>
+            <widget class="QPushButton" name="btnCommit">
+             <property name="text">
+              <string>提交</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
         </layout>
        </widget>
       </item>
@@ -281,7 +305,7 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>24</height>
+     <height>26</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -291,7 +315,6 @@
     <addaction name="actionNew"/>
     <addaction name="actionOpen"/>
     <addaction name="actionSave"/>
-    <addaction name="actionSaveAs"/>
    </widget>
    <widget class="QMenu" name="menuConfig">
     <property name="title">
@@ -299,8 +322,16 @@
     </property>
     <addaction name="actionConnection"/>
    </widget>
+   <widget class="QMenu" name="menuplay">
+    <property name="title">
+     <string>预览</string>
+    </property>
+    <addaction name="actionFromStart"/>
+    <addaction name="actionFromNow"/>
+   </widget>
    <addaction name="menuFile"/>
    <addaction name="menuConfig"/>
+   <addaction name="menuplay"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <action name="actionNew">
@@ -326,6 +357,16 @@
   <action name="actionConnection">
    <property name="text">
     <string>连接</string>
+   </property>
+  </action>
+  <action name="actionFromStart">
+   <property name="text">
+    <string>从头开始</string>
+   </property>
+  </action>
+  <action name="actionFromNow">
+   <property name="text">
+    <string>从当前位置开始</string>
    </property>
   </action>
  </widget>
