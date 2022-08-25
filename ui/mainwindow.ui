@@ -329,9 +329,27 @@
     <addaction name="actionFromStart"/>
     <addaction name="actionFromNow"/>
    </widget>
+   <widget class="QMenu" name="menuImport">
+    <property name="title">
+     <string>导入</string>
+    </property>
+    <addaction name="actionFromText"/>
+    <addaction name="actionFromExcel"/>
+    <addaction name="actionFromJson"/>
+   </widget>
+   <widget class="QMenu" name="menuHelp">
+    <property name="title">
+     <string>帮助</string>
+    </property>
+    <addaction name="actionVersion"/>
+    <addaction name="actionManual"/>
+    <addaction name="actionWebsite"/>
+   </widget>
    <addaction name="menuFile"/>
+   <addaction name="menuImport"/>
    <addaction name="menuConfig"/>
    <addaction name="menuplay"/>
+   <addaction name="menuHelp"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <action name="actionNew">
@@ -367,6 +385,36 @@
   <action name="actionFromNow">
    <property name="text">
     <string>从当前位置开始</string>
+   </property>
+  </action>
+  <action name="actionFromText">
+   <property name="text">
+    <string>来自文本</string>
+   </property>
+  </action>
+  <action name="actionFromExcel">
+   <property name="text">
+    <string>来自Excel</string>
+   </property>
+  </action>
+  <action name="actionFromJson">
+   <property name="text">
+    <string>来自JSON</string>
+   </property>
+  </action>
+  <action name="actionVersion">
+   <property name="text">
+    <string>查看版本</string>
+   </property>
+  </action>
+  <action name="actionManual">
+   <property name="text">
+    <string>帮助文档</string>
+   </property>
+  </action>
+  <action name="actionWebsite">
+   <property name="text">
+    <string>官方网站</string>
    </property>
   </action>
  </widget>

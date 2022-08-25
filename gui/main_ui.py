@@ -5,7 +5,7 @@ from ui import Ui_MainWindow
 from log_utils import logger
 from common_utils import CURRENT_DIR, gen_time_based_uuid
 from db_utils import Connection
-from gui import DbDialog, DialogEditor, DialogSelector, PlayerWindow
+from gui import DbDialog, DialogEditor, DialogSelector, PlayerWindow, TextImporter
 
 class MainWindow(QMainWindow, Ui_MainWindow):
     def __init__(self):
@@ -39,6 +39,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.btnCommit.clicked.connect(self.__commit_interact_modify)
         self.actionSave.triggered.connect(self.__save_dialog_interacts)
         self.actionFromStart.triggered.connect(self.__play_dialog_from_start)
+        self.actionFromText.triggered.connect(self.__import_interacts_from_text)
     
     
     def __db_config(self):
@@ -63,6 +64,19 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.dialogSelectorWindow = DialogSelector()
         self.dialogSelectorWindow.sigOpen.connect(self.__slot_open_dialog)
         self.dialogSelectorWindow.showNormal()
+        
+        
+    def __import_interacts_from_text(self):
+        if self.currentDialog == None:
+            self.logger.warning("You have to open a dialog before you import any interact.")
+            QMessageBox.warning(self, 'Warning', 'No dialog opened.')
+            return
+        
+        self.logger.info('Opening text importer window to import interacts.')
+        
+        self.textImporterWindow = TextImporter()
+        
+        self.textImporterWindow.showNormal()
         
         
     def __show_conn_string(self):
